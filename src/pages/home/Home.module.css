@@ -15,8 +15,9 @@
 }
 
 .bestsellers {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: 400;
+  color: rgb(3, 115, 115);
 }
 
 .card {
@@ -63,9 +64,6 @@
   color: #fafafa;
 }
 
-.button:hover {
-}
-
 .prevIcon,
 .nextIcon {
   color: rgb(79, 56, 56);
@@ -89,8 +87,42 @@
 
 .col-md-4 {
   flex: 0 0 auto;
-  width: 50%; /* You can adjust the width based on your preference */
+  width: 50%; 
   display: inline-block;
   vertical-align: top;
   white-space: normal;
+}
+
+.pagination {
+  position: relative;
+  bottom: 160px;
+}
+
+.pagination-item {
+  background-color: #fafafa;
+}
+
+.page-item:active {
+  background-color: #fafafa !important;
+}
+
+.page-link:hover {
+  background-color: #fafafa;
+}
+[data-aos] {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Card, Button, Carousel, Pagination } from "react-bootstrap";
 import book1 from "../../assets/images/philosophorsstone.png";
 import book2 from "../../assets/images/chamberofsecrets.png";
@@ -16,6 +16,8 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Home.module.css";
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 const books = [
   {
@@ -77,6 +79,17 @@ const books = [
 const chunkSize = 4;
 
 const Home: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  React.useEffect(() => {
+    AOS.init();
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, []);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const totalChunks = Math.ceil(books.length / chunkSize);
@@ -92,11 +105,19 @@ const Home: React.FC = () => {
           <img
             src={welcomeImage}
             alt="Welcome"
-            className={` ${styles.welcomeImage}`}
+            className={`fade-in ${styles.welcomeImage} ${isVisible ? 'visible' : ''}`}
+            data-aos="zoom-in"
+            data-aos-duration="3500"
           />
         </div>
       </div>
-      <h2 className={`text-center ${styles.bestsellers}`}>Best Sellers</h2>
+      <h2
+        className={`text-center ${styles.bestsellers}`}
+        data-aos="fade-left"
+        data-aos-duration="3000"
+      >
+        Best Sellers
+      </h2>
       <Carousel
         prevIcon={
           <FontAwesomeIcon icon={faChevronLeft} className={styles.prevIcon} />
@@ -125,6 +146,10 @@ const Home: React.FC = () => {
                       src={book.image}
                       alt={book.title}
                       className={`${styles.cardImg} card-img mx-auto`}
+                      data-aos="zoom-in"
+                      data-aos-duration="3000"
+                      data-aos-once="true"
+                      data-aos-offset="200"
                     />
                     <Card.Body className="text-center">
                       <Card.Title className={`${styles.cardTitle} card-title`}>
@@ -150,6 +175,7 @@ const Home: React.FC = () => {
             key={index}
             active={index === activeIndex}
             onClick={() => handleSelect(index, null)}
+            className={`${styles.pageLink} page-link`}
           >
             {index + 1}
           </Pagination.Item>
